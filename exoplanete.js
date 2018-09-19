@@ -1,9 +1,11 @@
 /*----------------------------------------*\
-  chatScreen - exoplanete.js
+  how to draw an exoplpanet - exoplanete.js
+  @git : https://github.com/oogre/how-to-draw-an-exoplpanet.git
   @author Evrard Vincent (vincent@ogre.be)
   @Date:   2018-09-18 21:55:42
-  @Last Modified time: 2018-09-18 22:46:20
+  @Last Modified time: 2018-09-19 10:24:38
 \*----------------------------------------*/
+
 
 personne = 1;
 farine = 60 * personne; 	// préparer 60 gramme de farine par personne
