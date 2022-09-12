@@ -3,123 +3,117 @@
   @git : https://github.com/oogre/how-to-draw-an-exoplpanet.git
   @author Evrard Vincent (vincent@ogre.be)
   @Date:   2018-09-18 21:55:42
-  @Last Modified time: 2018-09-19 10:24:38
+  @Last Modified time: 2022-09-12 23:39:27
 \*----------------------------------------*/
 
 
-personne = 1;
-farine = 60 * personne; 	// préparer 60 gramme de farine par personne
-oeuf = 1 * personne; 		// préparer un oeuf par personne
-lait = 0.125 * personne;	// préparer 125 millilitres de lait par personne
-sucre = 0.5 * personne;		// préparer 0.5 cuillère à soupe de sucre par personne
-beurre = 12.5 * personne;	// préparer 12.5 gramme de beurre par personne
+people = 1;
+flour = 60 * people; 	// prepare 60 grams of flour per people
+egg = 1 * people; 		// prepare one egg per people
+milk = 0.125 * people;	// prepare 125 milliliters of milk per people
+sugar = 0.5 * people;		// prepare 0.5 spoon of sugar people
+butter = 12.5 * people;	// prepare 12.5 grams of butter per people
 
-import cuisine.ustensiles.Saladier; // prendre le concepte de Saladier dans les ustensiles dans la cuisine
-saladier = new Saladier();	 // créer un saladier à partir du concepte de Saladier
+import kitchen.tools.Bowl; // take the concept of a Bown the tools drawer in the kitchen
+bowl = new Bowl();	 // create a bowls from the concept of a Bowl
 
-saladier.ajouter( farine );	// appeler la fonctionnalité d'ajout de l'objet saladier
-saladier.ajouter( sucre );	// appeler la fonctionnalité d'ajout de l'objet saladier
-saladier.faireUnPuit();		// appeler la fonctionnalité faire un puit de l'objet saladier
+bowl.add( flour );	// execute the action to add flour in the bowl
+bowl.add( sugar );	// same with sugar
+bowl.makeAwell();		// Make a well in the center
 
-import cuisine.ustensiles.Bol; // prendre le concept de Bol dans les ustensiles dans la cuisine
-bol = new Bol();			// créer un bol à partir du concepte de Bol
-
-while(oeuf > 0){					// tant qu'il y a des oeufs
-	bol.ajouter( oeuf.casser() );	// ajouter le contenu d'un oeuf dans le bol
-	oeuf = oeuf - 1;				// mettre a jour le nombre d'oeuf disponnible
+while(egg > 0){			// do whats follow while there eggs (int their shell)
+	bowl.add( egg.break() );	// add the content of an egg in the bowl
+	egg = egg - 1;				// update the number of egg in the memory
 }
-bol.mélanger();				// mélanger le contenu du bol
+bowl.mix();				// mix the content of bowl
 
-saladier.ajouter(bol);
-
-while(saladier.isHétérogène()){
-	saladier.mélanger();
+while(bowl.isHeterogeneous()){
+	bowl.mix();
 }
 
-while( saladier.hétérogène() OU !saladier.contien(lait)){	// tant qu que le contenu du saladier est hétérogène
-	if(lait > 0){											// ou que le saladier ne contient pas de lait
-		lait_à_ajouter = lait / 10;				// prendre 1 dixieme du lait 
-		saladier.ajouter( lait_à_ajouter );
-		lait = lait - lait_à_ajouter;
+while( bowl.isHeterogeneous() OU !bowl.isContains(milk)){ // add little by little milk and mix during this time
+	if(milk > 0){
+		milk_to_add = milk / 10;
+		bowl.add( milk_to_add );
+		milk = milk - milk_to_add;
 	}
-	saladier.mélanger();
+	bowl.mix();
 }
 
-while( !saladier.isFluide() ){	// tant que le contenu du saladier n'est pas aussi fluide que vous le souhaitez 
-	lait = 0.025;
-	saladier.ajouter(lait);
-	while(saladier.isHétérogène()){
-		saladier.mélanger();
+while( !bowl.isFluide() ){	// if the bowl content isn't as fluid as you want
+	milk = 0.025;
+	bowl.add(milk);
+	while(bowl.isHeterogeneous()){
+		bowl.mix();
 	}
 }
 
-saladier.ajouter(beurre.fondre());
+// bowl.add(beurre.fondre());
+// while(bowl.isHeterogeneous()){
+// 	bowl.mix();
+// }
 
-while(saladier.isHétérogène()){
-	saladier.mélanger();
+batter = bowl.content;
+
+import kitchen.éléctro.Cook;
+import kitchen.tools.Pan;
+import kitchen.tools.Dipper;
+import kitchen.tableware.Dishe;
+cook = new Cook();
+pan = new Pan();
+dipper = new Dipper();
+dishe = new Dishe();
+
+cook.setup(9);
+cook.add(pan);
+
+while(!pan.temperature()<100){
+	wait();
 }
 
-pate = saladier.contenu;
-
-import cuisine.éléctroménager.Cuisinière;
-import cuisine.ustensiles.Poêle;
-import cuisine.ustensiles.Louche;
-import cuisine.vaisselle.Assiette;
-cuisinière = new Cuisinière();
-poêle = new Poêle();
-louche = new Louche();
-assiette = new Assiette();
-
-cuisinière.règler(9);
-cuisinière.ajouter(poêle);
-
-while(!poêle.température()<100){
-	attendre();
-}
-
-while(pate > 0){
-	louche.remplir(pate);
-	pate = pate - louche;
-	poêle.ajouter(louche);
-	while( poêle.isRond() ){
-		poêle.faireTourner();
+while(batter > 0){
+	dipper.fill(batter);
+	batter = batter - dipper;
+	pan.add(dipper);
+	while( pan.isRound() ){
+		pan.makeItRound();
 	}
-	while( poêle.isFluide() ){
-		attendre();
+	while( pan.isFluide() ){
+		wait();
 	}
-	while( poêle.contenu.isColler() ){
-		poêle.secouer();
+	while( pan.content.isSticky() ){
+		pan.shakeIt();
 	}
-	poêle.retourner();
-	while( ! poêle.isCrèpe() ){
-		attendre();	
+	pan.content.flip();
+	while( ! pan.isPancake() ){
+		wait();	
 	}
-	crèpe = poêle.contenu;
-	assiette.ajouter(crèpe);
+	pancake = pan.content;
+	dishe.add(pancake);
 }
 
 
 
-ustensiles.isFluide(){
+tools.isFluide(){
 	if(this.contenu.fluidité > plasticine.fluidité )
 		return true;
 	else
 		return false;
 }
 
-Poêle.isRond(){
+pan.isRound(){
 	if(...)
 		return true;
 	else
 		return false;
 }
 
-poêle.faireTourner(){
+pan.makeItRound(){
 	this.rotationX(10 * cos(time));
 	this.rotationz(10 * sin(time));
 }
 
-poêle.secouer(){
+pan.shakeIt(){
 	this.translateZ(100 * sin(time));
 }
 
