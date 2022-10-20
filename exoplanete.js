@@ -1,5 +1,5 @@
 /*----------------------------------------*\
-  how to draw an exoplpanet - exoplanete.js
+  how to draw an exoplanet - exoplanete.js
   @git : https://github.com/oogre/how-to-draw-an-exoplpanet.git
   @author Evrard Vincent (vincent@ogre.be)
   @Date:   2018-09-18 21:55:42
